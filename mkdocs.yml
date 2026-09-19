@@ -1,0 +1,45 @@
+site_name: Лаборатория воспроизводимых результатов
+site_description: Учебный эксперимент о параллельной обработке данных — задание 1, T2 и P3
+site_author: Артём Солопов
+site_url: !ENV [SITE_URL, 'http://127.0.0.1:8000/']
+use_directory_urls: false
+theme:
+  name: material
+  language: ru
+  font: false
+  palette:
+    scheme: default
+    primary: teal
+    accent: amber
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+plugins:
+  - search:
+      lang: [ru, en]
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - footnotes
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+extra_css:
+  - assets/style.css
+validation:
+  nav:
+    omitted_files: info
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+nav:
+  - Обзор: index.md
+  - Результаты эксперимента: generated/results.md
+  - Исследование T2: research.md
+  - Воспроизводимость P3: pipeline.md
+  - Развёртывание: deployment.md
+  - Отчёт: report.md
+  - Лицензии: licenses.md

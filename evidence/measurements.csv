@@ -1,0 +1,14 @@
+metric,run,seconds
+experiment_cold,1,0.3952350839972496
+experiment_cached,1,0.07330191700020805
+experiment_cold,2,0.3676888330082875
+experiment_cached,2,0.06399370801227633
+experiment_cold,3,0.3737981660087826
+experiment_cached,3,0.06177141699299682
+experiment_cold,4,0.37724083400098607
+experiment_cached,4,0.06058866699459031
+experiment_cold,5,0.36313283299386967
+experiment_cached,5,0.05755029099236708
+mkdocs_strict_build,1,0.5511677080066875
+mkdocs_strict_build,2,0.453606333991047
+mkdocs_strict_build,3,0.4800510829954874

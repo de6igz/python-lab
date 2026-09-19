@@ -1,0 +1,11 @@
+{
+  "python": "3.12.13",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "experiment_cold_median_s": 0.3737981660087826,
+  "experiment_cached_median_s": 0.06177141699299682,
+  "speedup": 6.051312794899315,
+  "mkdocs_median_s": 0.4800510829954874,
+  "site_bytes": 3001419,
+  "results_html_bytes": 18057,
+  "all_checks_passed": true
+}

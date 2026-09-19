@@ -1,0 +1,11 @@
+.venv/
+.task-3960/
+.task-3960-publish/
+.work/
+site/
+_build/
+__pycache__/
+*.py[cod]
+.DS_Store
+docs/generated/
+artifacts/

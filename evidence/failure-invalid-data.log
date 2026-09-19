@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/artem.solopov/Documents/ChatGPT/python-lab/scripts/experiment.py", line 166, in <module>
+    main()
+  File "/Users/artem.solopov/Documents/ChatGPT/python-lab/scripts/experiment.py", line 93, in main
+    groups = read_data(args.data)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/artem.solopov/Documents/ChatGPT/python-lab/scripts/experiment.py", line 37, in read_data
+    raise ValueError('workers/run must be positive; seconds must be finite and positive')
+ValueError: workers/run must be positive; seconds must be finite and positive

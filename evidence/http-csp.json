@@ -1,0 +1,6 @@
+{
+  "url": "http://127.0.0.1:8001/site/",
+  "status": 200,
+  "marker_present": true,
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; worker-src 'self' blob:; connect-src 'self'"
+}

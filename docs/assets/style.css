@@ -1,0 +1,7 @@
+:root { --md-text-font: system-ui, -apple-system, sans-serif; --md-code-font: ui-monospace, monospace; }
+.md-typeset h1 { font-weight: 750; letter-spacing: -.035em; color: #17324d; }
+.md-typeset .lead { font-size: 1.3em; line-height: 1.65; }
+.md-typeset .formula { padding: 1.5rem; background: #f1f7f6; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 2rem; }
+.md-typeset img { border-radius: 12px; }
+.md-typeset table:not([class]) { width: 100%; }
+@media print { .md-header, .md-sidebar, .md-footer { display: none; } }

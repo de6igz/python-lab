@@ -1,0 +1,5 @@
+
+Aborted with 1 warnings in strict mode!
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-hfby69b2/site
+WARNING -  Doc file 'index.md' contains a link 'absent.md', but the target is not found among documentation files.
