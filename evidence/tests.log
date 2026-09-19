@@ -2,6 +2,6 @@ test_known_constant_samples (test_experiment.ExperimentTests.test_known_constant
 test_reject_nonfinite_and_duplicate (test_experiment.ExperimentTests.test_reject_nonfinite_and_duplicate) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.131s
+Ran 2 tests in 0.082s
 
 OK

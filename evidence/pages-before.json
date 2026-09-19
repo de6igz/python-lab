@@ -1,0 +1,17 @@
+{
+  "index.html": {
+    "status": 200,
+    "body": null,
+    "marker_present": true
+  },
+  "generated/metadata.json": {
+    "status": 200,
+    "body": "{\n  \"data_sha256\": \"f5f27db508d918eee44c494d1b058615ce1b45c57bddf2621566bb65cac0640b\",\n  \"code_sha256\": \"c57933b28a332ba5843cf3e62a3cf6c8dfc48f4d1d44b9898f199e120ee89ec5\",\n  \"requirements_sha256\": \"f3e66f01f8da47ea59bf21c97bf3ad11feba8a3577d551d9ad77dc978713c562\",\n  \"python\": \"3.12.13\",\n  \"seed\": 3960,\n  \"replicates\": 20000,\n  \"cache_key\": \"675cc313e9a9207c6ac8f8db52500523c114a26764f7edcdb94506cad45fbdb2\",\n  \"cache_hit\": false,\n  \"commit\": \"58c73a9aef717b04c54924e67a3f0c9d17a2a92e\",\n  \"dirty\": false,\n  \"built_at\": \"2026-09-19T09:51:17+00:00\",\n  \"dataset_version\": \"sha256:f5f27db508d918eee44c494d1b058615ce1b45c57bddf2621566bb65cac0640b\",\n  \"artifacts\": {\n    \"chart.svg\": \"240c70fe99e84cb9de17f0bc6a399f6de700bdc2d74f727a69e2e89bd6df9c40\",\n    \"summary.csv\": \"32a8621ce4d783427a426792107324e7514589997ecd29fb2ac0e91438696680\"\n  }\n}\n",
+    "marker_present": null
+  },
+  "generated/summary.csv": {
+    "status": 200,
+    "body": "workers,n,mean,low,high,speedup,efficiency\r\n1,5,12.4,12.22,12.58,1.0,1.0\r\n2,5,6.76,6.66,6.84,1.834319526627219,0.9171597633136095\r\n4,5,4.14,4.06,4.24,2.9951690821256043,0.7487922705314011\r\n8,5,3.54,3.46,3.64,3.5028248587570623,0.4378531073446328\r\n",
+    "marker_present": null
+  }
+}

@@ -47,13 +47,20 @@ def main():
             measurements.extend([dict(metric='experiment_cold', run=i+1, seconds=t1), dict(metric='experiment_cached', run=i+1, seconds=t2)])
         original_svg = (output / 'chart.svg').read_bytes()
         changed = folder / 'changed.csv'
-        changed.write_text((ROOT / 'data/timings.csv').read_text().replace('8,1,3.5', '8,1,2.5'))
+        with (ROOT / 'data/timings.csv').open(newline='') as stream:
+            inputs = list(csv.DictReader(stream))
+        previous_seconds = float(inputs[-1]['seconds'])
+        inputs[-1]['seconds'] = str(previous_seconds + 1.0)
+        with changed.open('w', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=['workers', 'run', 'seconds'])
+            writer.writeheader()
+            writer.writerows(inputs)
         result, duration = command(base + ['--data', str(changed)])
         updated = json.loads(result.stdout)
         assert not updated['cache_hit'] and updated['cache_key'] != old['cache_key']
         assert updated['rows'] != old['rows'] and (output / 'chart.svg').read_bytes() != original_svg
         mutation = {'original': old, 'changed': updated, 'changed_seconds': duration,
-                    'change': 'workers=8, run=1, seconds: 3.5 -> 2.5', 'svg_changed': True}
+                    'change': f"workers={inputs[-1]['workers']}, run={inputs[-1]['run']}, seconds: {previous_seconds} -> {inputs[-1]['seconds']}", 'svg_changed': True}
         (EVIDENCE / 'data-change.json').write_text(json.dumps(mutation, indent=2) + '\n')
         (cache / updated['cache_key'] / 'result.json').write_text('corrupted')
         repaired, _ = command(base + ['--data', str(changed)])

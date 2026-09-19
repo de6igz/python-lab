@@ -1,0 +1,37 @@
+{
+  "url": "https://de6igz.github.io/python-lab/",
+  "checked_at": "2026-09-19T10:09:56.980805+00:00",
+  "index.html": {
+    "status": 200,
+    "body": null,
+    "marker_present": true,
+    "mathml_present": null
+  },
+  "generated/metadata.json": {
+    "status": 200,
+    "body": "{\n  \"data_sha256\": \"95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671\",\n  \"code_sha256\": \"c57933b28a332ba5843cf3e62a3cf6c8dfc48f4d1d44b9898f199e120ee89ec5\",\n  \"requirements_sha256\": \"f3e66f01f8da47ea59bf21c97bf3ad11feba8a3577d551d9ad77dc978713c562\",\n  \"python\": \"3.12.13\",\n  \"seed\": 3960,\n  \"replicates\": 20000,\n  \"cache_key\": \"00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670\",\n  \"cache_hit\": false,\n  \"commit\": \"599eb1c3045b84c69ac28e0a581cdded8ccefe15\",\n  \"dirty\": false,\n  \"built_at\": \"2026-09-19T10:02:00+00:00\",\n  \"dataset_version\": \"sha256:95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671\",\n  \"artifacts\": {\n    \"chart.svg\": \"827bd0d060eefe50b1026816c60157725c659868b8dd52d18a82ed3bbc3c41e1\",\n    \"summary.csv\": \"42509b18aaf7d31e25e805958ea33d68eca915184181b5f1520bdfd4048f6d44\"\n  }\n}\n",
+    "marker_present": null,
+    "mathml_present": null
+  },
+  "generated/summary.csv": {
+    "status": 200,
+    "body": "workers,n,mean,low,high,speedup,efficiency\r\n1,5,12.4,12.22,12.58,1.0,1.0\r\n2,5,6.76,6.66,6.84,1.834319526627219,0.9171597633136095\r\n4,5,4.14,4.06,4.24,2.9951690821256043,0.7487922705314011\r\n8,5,3.34,2.9,3.62,3.7125748502994016,0.4640718562874252\r\n",
+    "marker_present": null,
+    "mathml_present": null
+  },
+  "generated/results.html": {
+    "status": 200,
+    "body": null,
+    "marker_present": null,
+    "mathml_present": true
+  },
+  "search/search_index.json": {
+    "status": 200,
+    "marker_present": null,
+    "mathml_present": null,
+    "sha256": "65f77cfdd23b6a3613aa0aaaff90f4063e4f3f78827cf83fb4092505d8a4eb74",
+    "document_count": 34,
+    "browser_query": "вычисления",
+    "browser_result_pages": 3
+  }
+}

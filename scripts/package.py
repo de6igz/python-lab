@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def report():
     parts = ['# Отчёт: генераторы статических сайтов\n\nАртём Солопов · Задание 1 · T2 и P3\n\n'
-             'Статус: локальная часть выполнена; публикация на хостингах и сдача в Moodle отложены.\n']
+             'Статус: Pages и Helios опубликованы; автоматическая доставка Helios и сдача Moodle ещё не завершены.\n']
     for name in ['report.md', 'research.md', 'pipeline.md', 'deployment.md', 'generated/results.md', 'licenses.md']:
         text = (ROOT / 'docs' / name).read_text()
         base = Path('docs') / Path(name).parent
@@ -24,7 +24,10 @@ def report():
     parts.append('# Приложение: полный workflow\n\n```yaml\n' +
                  (ROOT / '.github/workflows/site.yml').read_text() + '\n```')
     for path in sorted((ROOT / 'evidence').glob('*.log')):
-        parts.append('## ' + path.name + '\n\n```text\n' + path.read_text() + '\n```')
+        log = path.read_text()
+        if path.name.startswith('ci-'):
+            log = 'Последние 40 строк; полный лог: evidence/' + path.name + '\n' + '\n'.join(log.splitlines()[-40:])
+        parts.append('## ' + path.name + '\n\n```text\n' + log + '\n```')
     (ROOT / 'REPORT.md').write_text('\n\n---\n\n'.join(parts))
 
 

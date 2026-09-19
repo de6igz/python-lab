@@ -1,50 +1,7 @@
 {
   "original": {
     "cache_hit": false,
-    "elapsed_seconds": 0.3330567919911118,
-    "cache_key": "675cc313e9a9207c6ac8f8db52500523c114a26764f7edcdb94506cad45fbdb2",
-    "rows": [
-      {
-        "workers": 1,
-        "n": 5,
-        "mean": 12.4,
-        "low": 12.22,
-        "high": 12.58,
-        "speedup": 1.0,
-        "efficiency": 1.0
-      },
-      {
-        "workers": 2,
-        "n": 5,
-        "mean": 6.76,
-        "low": 6.66,
-        "high": 6.84,
-        "speedup": 1.834319526627219,
-        "efficiency": 0.9171597633136095
-      },
-      {
-        "workers": 4,
-        "n": 5,
-        "mean": 4.14,
-        "low": 4.06,
-        "high": 4.24,
-        "speedup": 2.9951690821256043,
-        "efficiency": 0.7487922705314011
-      },
-      {
-        "workers": 8,
-        "n": 5,
-        "mean": 3.54,
-        "low": 3.46,
-        "high": 3.64,
-        "speedup": 3.5028248587570623,
-        "efficiency": 0.4378531073446328
-      }
-    ]
-  },
-  "changed": {
-    "cache_hit": false,
-    "elapsed_seconds": 0.3673765420098789,
+    "elapsed_seconds": 0.33640779099368956,
     "cache_key": "00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670",
     "rows": [
       {
@@ -85,7 +42,50 @@
       }
     ]
   },
-  "changed_seconds": 0.3958236670005135,
-  "change": "workers=8, run=1, seconds: 3.5 -> 2.5",
+  "changed": {
+    "cache_hit": false,
+    "elapsed_seconds": 0.3349615829938557,
+    "cache_key": "92efac07f1c46c14ff4b76454d06fd442f6a86453e57cc22fe70de884a358271",
+    "rows": [
+      {
+        "workers": 1,
+        "n": 5,
+        "mean": 12.4,
+        "low": 12.22,
+        "high": 12.58,
+        "speedup": 1.0,
+        "efficiency": 1.0
+      },
+      {
+        "workers": 2,
+        "n": 5,
+        "mean": 6.76,
+        "low": 6.66,
+        "high": 6.84,
+        "speedup": 1.834319526627219,
+        "efficiency": 0.9171597633136095
+      },
+      {
+        "workers": 4,
+        "n": 5,
+        "mean": 4.14,
+        "low": 4.06,
+        "high": 4.24,
+        "speedup": 2.9951690821256043,
+        "efficiency": 0.7487922705314011
+      },
+      {
+        "workers": 8,
+        "n": 5,
+        "mean": 3.54,
+        "low": 2.94,
+        "high": 4.12,
+        "speedup": 3.5028248587570623,
+        "efficiency": 0.4378531073446328
+      }
+    ]
+  },
+  "changed_seconds": 0.3645677919994341,
+  "change": "workers=8, run=5, seconds: 3.5 -> 4.5",
   "svg_changed": true
 }

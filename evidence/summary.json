@@ -1,11 +1,11 @@
 {
   "python": "3.12.13",
   "platform": "macOS-26.6.2-arm64-arm-64bit",
-  "experiment_cold_median_s": 0.3737981660087826,
-  "experiment_cached_median_s": 0.06177141699299682,
-  "speedup": 6.051312794899315,
-  "mkdocs_median_s": 0.4800510829954874,
-  "site_bytes": 3001419,
-  "results_html_bytes": 18057,
+  "experiment_cold_median_s": 0.3703839590016287,
+  "experiment_cached_median_s": 0.058992082995246165,
+  "speedup": 6.278536715366973,
+  "mkdocs_median_s": 0.45548862501163967,
+  "site_bytes": 3000775,
+  "results_html_bytes": 18086,
   "all_checks_passed": true
 }

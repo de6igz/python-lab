@@ -2,7 +2,7 @@
 
 Артём Солопов · Задание 1 · T2 и P3
 
-Статус: локальная часть выполнена; публикация на хостингах и сдача в Moodle отложены.
+Статус: Pages и Helios опубликованы; автоматическая доставка Helios и сдача Moodle ещё не завершены.
 
 
 ---
@@ -14,9 +14,16 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 
 ## Статус
 
-Локальная реализация собрана и проверена. Строгая сборка, тесты,
-проверка кэша, обновление CSV/SVG и аудит локальных ссылок прошли успешно. Публикация в GitHub и на отечественном хостинге отложена
-по решению автора; ссылки, remote run и скриншоты внешнего CI пока отсутствуют.
+Реализация собрана и проверена; сайт опубликован на двух площадках:
+
+- [Исходники GitHub](https://github.com/de6igz/python-lab).
+- [GitHub Pages](https://de6igz.github.io/python-lab/) — автоматическая доставка Actions.
+- [Helios ИТМО](https://se.ifmo.ru/~s332961/python-lab/) — ручная доставка SSH/rsync.
+
+Для обеих площадок подтверждены HTTP 200, контрольная строка, MathML и загрузка
+поискового индекса. Русский поиск «вычисления» возвращает три страницы.
+Автоматическая job Helios ещё выключена: установка ограниченного deploy-ключа
+ожидает разрешения владельца. Работа в Moodle пока не отправлена.
 
 ## Выполнение основного хода работы
 
@@ -25,8 +32,8 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 | 1–3: Python, pip, virtualenv | Python 3.12.13; virtualenv 20.31.2; проверено отдельное окружение с pip 25.1.1 |
 | 4: фиксация зависимостей | requirements.txt содержит точные версии всех установленных пакетов; .gitignore исключает кэши и сборки |
 | 5–6: каркас и строгая сборка | Material for MkDocs; Makefile запускает эксперимент перед сборкой |
-| 7–8: репозиторий и Actions | Локальный Git уже инициализирован; workflow подготовлен; удалённая публикация ожидает следующего этапа |
-| 9–10: отечественный хостинг | Подготовлен SSH/rsync-скрипт и выключенная до настройки job |
+| 7–8: репозиторий и Actions | Публичный репозиторий, Pages и реальные успешные/проваленный запуски Actions |
+| 9–10: отечественный хостинг | Helios опубликован вручную; автоматическая SSH/rsync job ожидает настройки ключа |
 | 11: базовый URL | SITE_URL для каждой площадки, относительные ссылки, use_directory_urls=false |
 | 12: проверка результата | HTTP healthcheck, аудит локальных ссылок/ресурсов, поиск и нативная формула |
 | 13: лицензии | MIT для кода, CC BY 4.0 для текста, CC0 для учебного CSV |
@@ -70,22 +77,44 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 
 | Показатель | Значение | Метод |
 | --- | --- | --- |
-| Расчёт без кэша, медиана | 0.373798 с | 5 запусков, удаление только тестового кэша |
-| Расчёт с кэшем, медиана | 0.061771 с | 5 повторных запусков с теми же входами |
-| Отношение медиан | 6.05 раза | без искусственных задержек |
-| Строгая сборка MkDocs, медиана | 0.480051 с | 3 запуска, уже сгенерированные страницы |
-| HTML страницы результатов | 18057 байт | без сжатия |
-| Измеренная сборка целиком | 3001419 байт | со скриншотами; сумма файлов перед финальной редактурой отчёта |
-| Удалённая доставка Pages / Helios | Не измерена | публикация отложена |
+| Расчёт без кэша, медиана | 0.370384 с | 5 запусков, удаление только тестового кэша |
+| Расчёт с кэшем, медиана | 0.058992 с | 5 повторных запусков с теми же входами |
+| Отношение медиан | 6.28 раза | без искусственных задержек |
+| Строгая сборка MkDocs, медиана | 0.455489 с | 3 запуска, уже сгенерированные страницы |
+| HTML страницы результатов | 18086 байт | без сжатия |
+| Измеренная сборка целиком | 3000775 байт | со скриншотами; сумма файлов перед финальной редактурой отчёта |
+| Pages: deploy-pages | 9 с / 11 с | первая публикация / обновление CSV; время job по API Actions |
+| Helios | Ручная доставка успешна | время не измерялось; автоматическая job выключена |
 
 Исходные ряды: `evidence/measurements.csv`; сводка: `evidence/summary.json`.
 
 ## Изменение данных и кэш
 
-В копии CSV изменено время для workers=8, run=1: 3.5 → 2.5 с. Среднее в группе
-изменилось с 3.540 до 3.340 с; ключ кэша и SVG изменились. Повторный запуск с
-неизменными входами использует кэш. Повреждённый JSON пересчитывается. Подробности
-до/после сохранены в `evidence/data-change.json`. Оригинал набора не изменён.
+В коммите `599eb1c3045b84c69ac28e0a581cdded8ccefe15` в исходном CSV изменено
+время для workers=8, run=1: 3.5 → 2.5 с. После push среднее на GitHub Pages
+изменилось с 3.540 до 3.340 с; изменились SHA-256 данных, ключ кэша и SVG.
+Снимки удалённых ответов: `evidence/pages-before.json` и `evidence/pages-after.json`.
+Та же версия данных опубликована вручную на Helios (`evidence/helios-published.json`).
+
+Отдельный повторяемый тест `scripts/verify.py` прибавляет 1 с к последней записи
+изолированной копии CSV и проверяет пересчёт. Он работает и после обновления
+основного набора. Неизменные входы используют кэш; повреждённый JSON пересчитывается.
+Результаты этого теста: `evidence/data-change.json`.
+
+## Реальные запуски GitHub Actions
+
+| Запуск | Результат | Стадии |
+| --- | --- | --- |
+| [35435796768](https://github.com/de6igz/python-lab/actions/runs/35435796768) | Успех, исходная публикация | check 27 с; build 21 с; deploy-pages 9 с |
+| [35436124108](https://github.com/de6igz/python-lab/actions/runs/35436124108) | Ожидаемый сбой | `does-not-exist.md`: strict build завершился с кодом 1; доставка пропущена |
+| [35436253645](https://github.com/de6igz/python-lab/actions/runs/35436253645) | Успех после изменения CSV | check 23 с; build 30 с; deploy-pages 11 с |
+
+Полные логи: `evidence/ci-initial-build.log`, `evidence/ci-intentional-failure.log`.
+Метаданные времени стадий: `evidence/ci-initial-jobs.json`,
+`evidence/ci-data-change-jobs.json`. Скриншот успешного CI сохранён локально
+в `evidence/ci-success.png`. Скриншот неуспешного запуска пока не получен:
+страница GitHub в браузере отвечает ERR_TIMED_OUT, результат подтверждён API и логом.
+В логе checkout токен замаскирован (`***`); SSH-секреты ещё не настраивались.
 
 ## Проверки в браузере
 
@@ -305,6 +334,7 @@ Push в любую ветку и pull request запускают проверк�
 
 ## Отечественный SSH-хостинг
 
+Сайт опубликован вручную: https://se.ifmo.ru/~s332961/python-lab/.
 Для Helios подготовлена отдельная job `deploy-helios`, пока выключенная.
 Перед включением нужно создать **отдельный каталог сайта** в `public_html`,
 проверить доступ по HTTPS и установить отдельный deploy-ключ с минимальными правами.
@@ -314,7 +344,7 @@ Push в любую ветку и pull request запускают проверк�
 | --- | --- | --- |
 | HELIOS_ENABLED | Variable | `true` только после настройки |
 | HELIOS_HOST, HELIOS_PORT, HELIOS_USER | Variables | Адрес, порт SSH и логин |
-| HELIOS_DIR | Variable | Абсолютный путь выделенного каталога назначения |
+| HELIOS_DIR | Variable | Выделенный каталог; `.` при ограниченном rrsync-ключе |
 | HELIOS_URL | Variable | Публичный HTTPS URL, обязательно с завершающим `/` |
 | HELIOS_DEPLOY_KEY | Secret | Приватная часть отдельного deploy-ключа |
 | HELIOS_KNOWN_HOSTS | Secret | Проверенный ключ SSH-сервера |
@@ -357,8 +387,10 @@ release-каталоги и атомарная смена симлинка, ес
 
 После доставки healthcheck требует HTTP 200 и строку `RESEARCH-SITE-3960-OK`.
 Это проверяет доступность страницы, но не заменяет проверку поиска и формулы.
-Живые результаты внешнего CI, маскирование секретов и время удалённой доставки
-будут записаны только после реального запуска, а не по локальной имитации.
+Реальные запуски Pages и их время записаны в [отчёте](docs/report.md).
+Для Helios проверена ручная доставка в `public_html/python-lab`; автоматическая
+job требует отдельного ключа. Планируемое ограничение ключа: `restrict` и
+`rrsync -wo -no-del -munge` только для каталога сайта, без shell и туннелей.
 
 
 ---
@@ -388,7 +420,7 @@ release-каталоги и атомарная смена симлинка, ес
 | 1 | 5 | 12.400 | [12.220; 12.580] | 1.000 | 1.000 |
 | 2 | 5 | 6.760 | [6.660; 6.840] | 1.834 | 0.917 |
 | 4 | 5 | 4.140 | [4.060; 4.240] | 2.995 | 0.749 |
-| 8 | 5 | 3.540 | [3.460; 3.640] | 3.503 | 0.438 |
+| 8 | 5 | 3.340 | [2.900; 3.620] | 3.713 | 0.464 |
 
 В учебном наборе ускорение растёт медленнее числа потоков, а эффективность падает.
 Это согласуется с наличием последовательной части и накладных расходов, но не устанавливает
@@ -398,10 +430,10 @@ release-каталоги и атомарная смена симлинка, ес
 
 - [Таблица CSV](docs/generated/summary.csv)
 - [Метаданные JSON](docs/generated/metadata.json)
-- Коммит: `uncommitted`; незакоммиченные изменения: `True`.
-- Дата сборки UTC: `2026-09-19T09:11:02+00:00`.
-- Версия данных SHA-256: `f5f27db508d918eee44c494d1b058615ce1b45c57bddf2621566bb65cac0640b`.
-- Ключ кэша: `675cc313e9a9207c6ac8f8db52500523c114a26764f7edcdb94506cad45fbdb2`; попадание: `False`.
+- Коммит: `58c73a9aef717b04c54924e67a3f0c9d17a2a92e`; незакоммиченные изменения: `True`.
+- Дата сборки UTC: `2026-09-19T10:10:54+00:00`.
+- Версия данных SHA-256: `95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671`.
+- Ключ кэша: `00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670`; попадание: `False`.
 
 [Как повторить эксперимент](docs/generated/../pipeline.md) · [Исследование способов публикации](docs/generated/../research.md)
 
@@ -580,7 +612,103 @@ audit OK: 8 HTML files, no missing local links or external HTML/CSS assets
 ```text
 INFO    -  Cleaning site directory
 INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/site
-INFO    -  Documentation built in 0.22 seconds
+INFO    -  Documentation built in 0.16 seconds
+
+```
+
+---
+
+## ci-initial-build.log
+
+```text
+Последние 40 строк; полный лог: evidence/ci-initial-build.log
+2026-09-19T09:51:18.8642855Z Root directory input is valid!
+2026-09-19T09:51:19.0769907Z Beginning upload of artifact content to blob storage
+2026-09-19T09:51:19.1942685Z (node:2625) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-19T09:51:19.2492665Z Uploaded bytes 655207
+2026-09-19T09:51:19.2638647Z Finished uploading artifact content to blob storage!
+2026-09-19T09:51:19.2639756Z SHA256 digest of uploaded artifact zip is c2eaa80e1a447f924bfed1d1fbd4eeb0b0a998a1d2ab6381121ac92507efd00a
+2026-09-19T09:51:19.2642204Z Finalizing artifact upload
+2026-09-19T09:51:19.4487901Z Artifact github-pages.zip successfully finalized. Artifact ID 10581759820
+2026-09-19T09:51:19.4489224Z Artifact github-pages has been successfully uploaded! Final size is 655207 bytes. Artifact ID is 10581759820
+2026-09-19T09:51:19.4495894Z Artifact download URL: https://github.com/de6igz/python-lab/actions/runs/35435796768/artifacts/10581759820
+2026-09-19T09:51:19.4608772Z ##[end-action id=__actions_upload-pages-artifact.upload-artifact;outcome=success;conclusion=success;duration_ms=774]
+2026-09-19T09:51:19.5298715Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-19T09:51:19.5300171Z Post job cleanup.
+2026-09-19T09:51:19.6417251Z (node:2648) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-19T09:51:19.6418120Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-19T09:51:19.6590675Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/python-lab/python-lab --files-from manifest.txt --use-compress-program zstdmt
+2026-09-19T09:51:19.7305784Z (node:2648) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-19T09:51:19.7598327Z Sent 701 of 701 (100.0%), 0.0 MBs/sec
+2026-09-19T09:51:19.8101289Z Cache saved with key: experiment-Linux-py3.12.13-c14f74269e0fcefeccbeffa0f9acb91ee694cb489f0737514586b825abf671d3
+2026-09-19T09:51:19.8211046Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-19T09:51:19.8213603Z Post job cleanup.
+2026-09-19T09:51:19.9409870Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-47e8dce3410891a7fc32f7e1ff3faabbdefa52464814fb73c6937386f79a778c, not saving cache.
+2026-09-19T09:51:19.9412249Z (node:2668) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-19T09:51:19.9413923Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-19T09:51:19.9545268Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-19T09:51:19.9546564Z Post job cleanup.
+2026-09-19T09:51:20.0444003Z [command]/usr/bin/git version
+2026-09-19T09:51:20.0490695Z git version 2.55.0
+2026-09-19T09:51:20.0531969Z Temporarily overriding HOME='/home/runner/work/_temp/552464d9-4792-42f4-8f9e-044fae447229' before making global git config changes
+2026-09-19T09:51:20.0533429Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-19T09:51:20.0539745Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/python-lab/python-lab
+2026-09-19T09:51:20.0583349Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-19T09:51:20.0628360Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-19T09:51:20.0983962Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-19T09:51:20.1028210Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-19T09:51:20.1387350Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-19T09:51:20.1423708Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-19T09:51:20.1846397Z Cleaning up orphan processes
+2026-09-19T09:51:20.2122113Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830, actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+
+```
+
+---
+
+## ci-intentional-failure.log
+
+```text
+Последние 40 строк; полный лог: evidence/ci-intentional-failure.log
+2026-09-19T09:58:39.9779745Z python scripts/experiment.py --cache .work/cache
+2026-09-19T09:58:40.8014035Z {"cache_hit": false, "elapsed_seconds": 0.7857126309999956, "cache_key": "675cc313e9a9207c6ac8f8db52500523c114a26764f7edcdb94506cad45fbdb2", "rows": [{"workers": 1, "n": 5, "mean": 12.4, "low": 12.22, "high": 12.58, "speedup": 1.0, "efficiency": 1.0}, {"workers": 2, "n": 5, "mean": 6.76, "low": 6.66, "high": 6.84, "speedup": 1.834319526627219, "efficiency": 0.9171597633136095}, {"workers": 4, "n": 5, "mean": 4.14, "low": 4.06, "high": 4.24, "speedup": 2.9951690821256043, "efficiency": 0.7487922705314011}, {"workers": 8, "n": 5, "mean": 3.54, "low": 3.46, "high": 3.64, "speedup": 3.5028248587570623, "efficiency": 0.4378531073446328}]}
+2026-09-19T09:58:40.8077613Z python -m mkdocs build --strict --site-dir .work/site
+2026-09-19T09:58:41.0315181Z INFO    -  Cleaning site directory
+2026-09-19T09:58:41.0316272Z INFO    -  Building documentation to directory: /home/runner/work/python-lab/python-lab/.work/site
+2026-09-19T09:58:41.2827405Z INFO    -  Documentation built in 0.28 seconds
+2026-09-19T09:58:41.3182699Z ##[group]Run printf '\n[broken](does-not-exist.md)\n' >> docs/index.md
+2026-09-19T09:58:41.3183275Z [36;1mprintf '\n[broken](does-not-exist.md)\n' >> docs/index.md[0m
+2026-09-19T09:58:41.3183805Z [36;1mpython -m mkdocs build --strict --site-dir .work/negative[0m
+2026-09-19T09:58:41.3207102Z shell: /usr/bin/bash -e {0}
+2026-09-19T09:58:41.3207441Z env:
+2026-09-19T09:58:41.3207877Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+2026-09-19T09:58:41.3208401Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+2026-09-19T09:58:41.3209010Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+2026-09-19T09:58:41.3209473Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+2026-09-19T09:58:41.3209975Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+2026-09-19T09:58:41.3210414Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+2026-09-19T09:58:41.3210808Z ##[endgroup]
+2026-09-19T09:58:41.5174602Z INFO    -  Cleaning site directory
+2026-09-19T09:58:41.5175507Z INFO    -  Building documentation to directory: /home/runner/work/python-lab/python-lab/.work/negative
+2026-09-19T09:58:41.5724844Z WARNING -  Doc file 'index.md' contains a link 'does-not-exist.md', but the target is not found among documentation files.
+2026-09-19T09:58:41.7702393Z 
+2026-09-19T09:58:41.7702976Z Aborted with 1 warnings in strict mode!
+2026-09-19T09:58:41.8024237Z ##[error]Process completed with exit code 1.
+2026-09-19T09:58:41.8172427Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-19T09:58:41.8173704Z Post job cleanup.
+2026-09-19T09:58:41.8940158Z [command]/usr/bin/git version
+2026-09-19T09:58:41.8975236Z git version 2.55.0
+2026-09-19T09:58:41.9005758Z Temporarily overriding HOME='/home/runner/work/_temp/618b4640-0b98-4afd-aebb-f599f5781d7c' before making global git config changes
+2026-09-19T09:58:41.9007202Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-19T09:58:41.9011770Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/python-lab/python-lab
+2026-09-19T09:58:41.9044763Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-19T09:58:41.9074247Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-19T09:58:41.9322350Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-19T09:58:41.9355158Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-19T09:58:41.9619937Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-19T09:58:41.9664026Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-19T09:58:42.0065065Z Cleaning up orphan processes
+2026-09-19T09:58:42.0294031Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
 
 ```
 
@@ -609,7 +737,7 @@ ValueError: workers/run must be positive; seconds must be finite and positive
 
 Aborted with 1 warnings in strict mode!
 INFO    -  Cleaning site directory
-INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-hfby69b2/site
+INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-u_fdcgmb/site
 WARNING -  Doc file 'index.md' contains a link '#absent', but there is no such anchor on this page.
 
 ```
@@ -622,7 +750,7 @@ WARNING -  Doc file 'index.md' contains a link '#absent', but there is no such a
 
 Aborted with 1 warnings in strict mode!
 INFO    -  Cleaning site directory
-INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-hfby69b2/site
+INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-u_fdcgmb/site
 WARNING -  Doc file 'index.md' contains a link 'absent.md', but the target is not found among documentation files.
 
 ```
@@ -633,8 +761,8 @@ WARNING -  Doc file 'index.md' contains a link 'absent.md', but the target is no
 
 ```text
 INFO    -  Cleaning site directory
-INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-hfby69b2/site
-INFO    -  Documentation built in 0.04 seconds
+INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/verify-u_fdcgmb/site
+INFO    -  Documentation built in 0.03 seconds
 
 ```
 
@@ -647,7 +775,7 @@ test_known_constant_samples (test_experiment.ExperimentTests.test_known_constant
 test_reject_nonfinite_and_duplicate (test_experiment.ExperimentTests.test_reject_nonfinite_and_duplicate) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.131s
+Ran 2 tests in 0.082s
 
 OK
 
