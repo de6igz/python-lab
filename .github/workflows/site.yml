@@ -72,12 +72,10 @@ jobs:
         with:
           path: .work/site
       - name: Build for Helios canonical URL
-        if: ${{ vars.HELIOS_URL != '' }}
         env:
-          SITE_URL: ${{ vars.HELIOS_URL }}
+          SITE_URL: ${{ vars.HELIOS_URL || 'https://se.ifmo.ru/~s332961/python-lab/' }}
         run: python -m mkdocs build --strict --site-dir .work/helios
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: ${{ vars.HELIOS_URL != '' }}
         with:
           name: helios-site
           path: .work/helios
@@ -111,7 +109,7 @@ jobs:
 
   deploy-helios:
     needs: build
-    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.HELIOS_ENABLED == 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.HELIOS_ENABLED != 'false' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: helios
@@ -127,9 +125,9 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.HELIOS_DEPLOY_KEY }}
           KNOWN_HOSTS: ${{ secrets.HELIOS_KNOWN_HOSTS }}
-          SSH_HOST: ${{ vars.HELIOS_HOST }}
-          SSH_PORT: ${{ vars.HELIOS_PORT }}
-          SSH_USER: ${{ vars.HELIOS_USER }}
-          REMOTE_DIR: ${{ vars.HELIOS_DIR }}
-          SITE_URL: ${{ vars.HELIOS_URL }}
+          SSH_HOST: ${{ vars.HELIOS_HOST || 'cs.ifmo.ru' }}
+          SSH_PORT: ${{ vars.HELIOS_PORT || '2222' }}
+          SSH_USER: ${{ vars.HELIOS_USER || 's332961' }}
+          REMOTE_DIR: ${{ vars.HELIOS_DIR || '.' }}
+          SITE_URL: ${{ vars.HELIOS_URL || 'https://se.ifmo.ru/~s332961/python-lab/' }}
         run: bash scripts/deploy.sh .work/helios
