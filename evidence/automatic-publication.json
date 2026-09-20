@@ -1,0 +1,48 @@
+{
+  "helios": {
+    "url": "https://se.ifmo.ru/~s332961/python-lab/",
+    "http_status": 200,
+    "marker_present": true,
+    "metadata": {
+      "data_sha256": "95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671",
+      "code_sha256": "c57933b28a332ba5843cf3e62a3cf6c8dfc48f4d1d44b9898f199e120ee89ec5",
+      "requirements_sha256": "f3e66f01f8da47ea59bf21c97bf3ad11feba8a3577d551d9ad77dc978713c562",
+      "python": "3.12.13",
+      "seed": 3960,
+      "replicates": 20000,
+      "cache_key": "00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670",
+      "cache_hit": true,
+      "commit": "6c1b950e64bd652210eac91f8a36e14f327cf590",
+      "dirty": false,
+      "built_at": "2026-09-20T20:45:01+00:00",
+      "dataset_version": "sha256:95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671",
+      "artifacts": {
+        "chart.svg": "827bd0d060eefe50b1026816c60157725c659868b8dd52d18a82ed3bbc3c41e1",
+        "summary.csv": "42509b18aaf7d31e25e805958ea33d68eca915184181b5f1520bdfd4048f6d44"
+      }
+    }
+  },
+  "pages": {
+    "url": "https://de6igz.github.io/python-lab/",
+    "http_status": 200,
+    "marker_present": true,
+    "metadata": {
+      "data_sha256": "95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671",
+      "code_sha256": "c57933b28a332ba5843cf3e62a3cf6c8dfc48f4d1d44b9898f199e120ee89ec5",
+      "requirements_sha256": "f3e66f01f8da47ea59bf21c97bf3ad11feba8a3577d551d9ad77dc978713c562",
+      "python": "3.12.13",
+      "seed": 3960,
+      "replicates": 20000,
+      "cache_key": "00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670",
+      "cache_hit": true,
+      "commit": "6c1b950e64bd652210eac91f8a36e14f327cf590",
+      "dirty": false,
+      "built_at": "2026-09-20T20:45:01+00:00",
+      "dataset_version": "sha256:95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671",
+      "artifacts": {
+        "chart.svg": "827bd0d060eefe50b1026816c60157725c659868b8dd52d18a82ed3bbc3c41e1",
+        "summary.csv": "42509b18aaf7d31e25e805958ea33d68eca915184181b5f1520bdfd4048f6d44"
+      }
+    }
+  }
+}

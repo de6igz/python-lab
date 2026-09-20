@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-20",
+  "repository": "de6igz/python-lab",
+  "installed_key_fingerprint": "SHA256:VZlMq/SSDg7iFfeUVtj7BisKRkg15Vq3vDgIA0wh7Ik",
+  "restricted_directory": "/home/studs/s332961/public_html/python-lab",
+  "forced_command": "/usr/local/sbin/rrsync -wo -no-del -munge /home/studs/s332961/public_html/python-lab",
+  "shell_command_rejected": true,
+  "confirmed_github_secrets": [
+    "HELIOS_DEPLOY_KEY",
+    "HELIOS_KNOWN_HOSTS"
+  ],
+  "variables_configured": "reported by owner; fallback configuration committed",
+  "automatic_deploy_verified": true,
+  "screenshot_publication_authorized": true,
+  "screenshots_uploaded": true,
+  "blocker": "Browser access blocked; failed-run screenshot and Moodle submission pending.",
+  "verified_run": 35536497862
+}

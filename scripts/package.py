@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def report():
     parts = ['# Отчёт: генераторы статических сайтов\n\nАртём Солопов · Задание 1 · T2 и P3\n\n'
-             'Статус: Pages и Helios опубликованы; автоматическая доставка Helios и сдача Moodle ещё не завершены.\n']
+             'Статус: автоматическая публикация Pages и Helios проверена; сдача Moodle ещё не выполнена.\n']
     for name in ['report.md', 'research.md', 'pipeline.md', 'deployment.md', 'generated/results.md', 'licenses.md']:
         text = (ROOT / 'docs' / name).read_text()
         base = Path('docs') / Path(name).parent

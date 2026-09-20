@@ -2,7 +2,7 @@
 
 Артём Солопов · Задание 1 · T2 и P3
 
-Статус: Pages и Helios опубликованы; автоматическая доставка Helios и сдача Moodle ещё не завершены.
+Статус: автоматическая публикация Pages и Helios проверена; сдача Moodle ещё не выполнена.
 
 
 ---
@@ -18,12 +18,13 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 
 - [Исходники GitHub](https://github.com/de6igz/python-lab).
 - [GitHub Pages](https://de6igz.github.io/python-lab/) — автоматическая доставка Actions.
-- [Helios ИТМО](https://se.ifmo.ru/~s332961/python-lab/) — ручная доставка SSH/rsync.
+- [Helios ИТМО](https://se.ifmo.ru/~s332961/python-lab/) — автоматическая доставка SSH/rsync из Actions.
 
 Для обеих площадок подтверждены HTTP 200, контрольная строка, MathML и загрузка
 поискового индекса. Русский поиск «вычисления» возвращает три страницы.
-Автоматическая job Helios ещё выключена: установка ограниченного deploy-ключа
-ожидает разрешения владельца. Работа в Moodle пока не отправлена.
+Автоматическая доставка на обе площадки подтверждена запуском
+[35536497862](https://github.com/de6igz/python-lab/actions/runs/35536497862).
+Работа в Moodle пока не отправлена.
 
 ## Выполнение основного хода работы
 
@@ -33,7 +34,7 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 | 4: фиксация зависимостей | requirements.txt содержит точные версии всех установленных пакетов; .gitignore исключает кэши и сборки |
 | 5–6: каркас и строгая сборка | Material for MkDocs; Makefile запускает эксперимент перед сборкой |
 | 7–8: репозиторий и Actions | Публичный репозиторий, Pages и реальные успешные/проваленный запуски Actions |
-| 9–10: отечественный хостинг | Helios опубликован вручную; автоматическая SSH/rsync job ожидает настройки ключа |
+| 9–10: отечественный хостинг | Автоматическая SSH/rsync-доставка на Helios, ограниченный ключ и HTTP healthcheck |
 | 11: базовый URL | SITE_URL для каждой площадки, относительные ссылки, use_directory_urls=false |
 | 12: проверка результата | HTTP healthcheck, аудит локальных ссылок/ресурсов, поиск и нативная формула |
 | 13: лицензии | MIT для кода, CC BY 4.0 для текста, CC0 для учебного CSV |
@@ -84,7 +85,8 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 | HTML страницы результатов | 18086 байт | без сжатия |
 | Измеренная сборка целиком | 3000775 байт | со скриншотами; сумма файлов перед финальной редактурой отчёта |
 | Pages: deploy-pages | 9 с / 11 с | первая публикация / обновление CSV; время job по API Actions |
-| Helios | Ручная доставка успешна | время не измерялось; автоматическая job выключена |
+| Helios: deploy-helios | 14 с | автоматическая job 35536497862, включая checkout, artifact и healthcheck |
+| Pages: deploy-pages в том же запуске | 8 с | доставка через официальный Pages artifact |
 
 Исходные ряды: `evidence/measurements.csv`; сводка: `evidence/summary.json`.
 
@@ -114,7 +116,23 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 `evidence/ci-data-change-jobs.json`. Скриншот успешного CI сохранён локально
 в `evidence/ci-success.png`. Скриншот неуспешного запуска пока не получен:
 страница GitHub в браузере отвечает ERR_TIMED_OUT, результат подтверждён API и логом.
-В логе checkout токен замаскирован (`***`); SSH-секреты ещё не настраивались.
+SSH-секреты настроены; в `evidence/ci-helios-deploy.log` значения `DEPLOY_KEY`
+и `KNOWN_HOSTS` замаскированы (`***`). Ключ допускает только rrsync-запись в
+каталог сайта, запрещает удаление и shell-команды; host key проверяется строго.
+
+## Автоматическая доставка на Helios
+
+[Запуск 35536497862](https://github.com/de6igz/python-lab/actions/runs/35536497862)
+завершился успешно: check — 20 с, build — 24 с, deploy-helios — 14 с,
+deploy-pages — 8 с. Метаданные: `evidence/ci-helios-jobs.json`.
+На обеих площадках HTTP 200, контрольная строка и коммит
+`6c1b950e64bd652210eac91f8a36e14f327cf590`, `dirty=false`;
+доказательства — `evidence/automatic-publication.json`.
+
+Первый ручной запуск 35536242989 пропустил Helios: условие включения не увидело
+переменные. Адрес, порт, пользователь, каталог и URL закреплены в workflow как
+несекретные значения по умолчанию. Variables могут их переопределить;
+`HELIOS_ENABLED=false` явно отключает доставку. Ключи хранятся только в Secrets.
 
 ## Проверки в браузере
 
@@ -125,9 +143,9 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 | Русскоязычный поиск | Запрос «вычисления» возвращает два совпадения в первой проверенной сборке |
 | Внешние ресурсы HTML/CSS | Аудит не обнаружил CDN и отсутствующих локальных ссылок |
 
-Скриншот сохранён в локальном архиве; публичная загрузка ожидает подтверждения.
+![Страница результатов](docs/assets/evidence/results-desktop.png)
 
-Скриншот сохранён в локальном архиве; публичная загрузка ожидает подтверждения.
+![Русскоязычный поиск](docs/assets/evidence/search-desktop.png)
 
 Скриншоты относятся к локальному предпросмотру, не к удалённому CI.
 
@@ -141,7 +159,7 @@ MkDocs 1.6.1, Material 9.6.14, стандартная библиотека Pytho
 
 ![График в подкаталоге, внешние ресурсы заблокированы](docs/assets/evidence/chart-offline.png)
 
-Скриншот сохранён в локальном архиве; публичная загрузка ожидает подтверждения.
+![Поиск при ограничивающем CSP](docs/assets/evidence/search-csp.png)
 
 Для формул дополнительные JS-ресурсы не загружаются: нативный MathML добавляет
 только разметку в HTML. Подключение собственного MathJax здесь не требуется.
@@ -334,15 +352,14 @@ Push в любую ветку и pull request запускают проверк�
 
 ## Отечественный SSH-хостинг
 
-Сайт опубликован вручную: https://se.ifmo.ru/~s332961/python-lab/.
-Для Helios подготовлена отдельная job `deploy-helios`, пока выключенная.
-Перед включением нужно создать **отдельный каталог сайта** в `public_html`,
-проверить доступ по HTTPS и установить отдельный deploy-ключ с минимальными правами.
+Автоматически публикуемый сайт: https://se.ifmo.ru/~s332961/python-lab/.
+Для Helios включена отдельная job `deploy-helios`. Создан отдельный каталог
+`public_html/python-lab`, проверен HTTPS и установлен ограниченный deploy-ключ.
 Пароль пользователя не используется ни в коде, ни в CI.
 
 | Настройка | Тип | Назначение |
 | --- | --- | --- |
-| HELIOS_ENABLED | Variable | `true` только после настройки |
+| HELIOS_ENABLED | Variable | `false` отключает доставку; по умолчанию включена |
 | HELIOS_HOST, HELIOS_PORT, HELIOS_USER | Variables | Адрес, порт SSH и логин |
 | HELIOS_DIR | Variable | Выделенный каталог; `.` при ограниченном rrsync-ключе |
 | HELIOS_URL | Variable | Публичный HTTPS URL, обязательно с завершающим `/` |
@@ -388,8 +405,8 @@ release-каталоги и атомарная смена симлинка, ес
 После доставки healthcheck требует HTTP 200 и строку `RESEARCH-SITE-3960-OK`.
 Это проверяет доступность страницы, но не заменяет проверку поиска и формулы.
 Реальные запуски Pages и их время записаны в [отчёте](docs/report.md).
-Для Helios проверена ручная доставка в `public_html/python-lab`; автоматическая
-job требует отдельного ключа. Планируемое ограничение ключа: `restrict` и
+Для Helios проверена автоматическая доставка в `public_html/python-lab`.
+Ограничение установленного ключа: `restrict` и
 `rrsync -wo -no-del -munge` только для каталога сайта, без shell и туннелей.
 
 
@@ -430,8 +447,8 @@ job требует отдельного ключа. Планируемое ог�
 
 - [Таблица CSV](docs/generated/summary.csv)
 - [Метаданные JSON](docs/generated/metadata.json)
-- Коммит: `58c73a9aef717b04c54924e67a3f0c9d17a2a92e`; незакоммиченные изменения: `True`.
-- Дата сборки UTC: `2026-09-19T10:10:54+00:00`.
+- Коммит: `e92cc2cdca59eadc34df2a3712852e31f40dad31`; незакоммиченные изменения: `True`.
+- Дата сборки UTC: `2026-09-20T20:43:18+00:00`.
 - Версия данных SHA-256: `95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671`.
 - Ключ кэша: `00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670`; попадание: `False`.
 
@@ -532,12 +549,10 @@ jobs:
         with:
           path: .work/site
       - name: Build for Helios canonical URL
-        if: ${{ vars.HELIOS_URL != '' }}
         env:
-          SITE_URL: ${{ vars.HELIOS_URL }}
+          SITE_URL: ${{ vars.HELIOS_URL || 'https://se.ifmo.ru/~s332961/python-lab/' }}
         run: python -m mkdocs build --strict --site-dir .work/helios
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: ${{ vars.HELIOS_URL != '' }}
         with:
           name: helios-site
           path: .work/helios
@@ -571,7 +586,7 @@ jobs:
 
   deploy-helios:
     needs: build
-    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.HELIOS_ENABLED == 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.HELIOS_ENABLED != 'false' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: helios
@@ -587,11 +602,11 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.HELIOS_DEPLOY_KEY }}
           KNOWN_HOSTS: ${{ secrets.HELIOS_KNOWN_HOSTS }}
-          SSH_HOST: ${{ vars.HELIOS_HOST }}
-          SSH_PORT: ${{ vars.HELIOS_PORT }}
-          SSH_USER: ${{ vars.HELIOS_USER }}
-          REMOTE_DIR: ${{ vars.HELIOS_DIR }}
-          SITE_URL: ${{ vars.HELIOS_URL }}
+          SSH_HOST: ${{ vars.HELIOS_HOST || 'cs.ifmo.ru' }}
+          SSH_PORT: ${{ vars.HELIOS_PORT || '2222' }}
+          SSH_USER: ${{ vars.HELIOS_USER || 's332961' }}
+          REMOTE_DIR: ${{ vars.HELIOS_DIR || '.' }}
+          SITE_URL: ${{ vars.HELIOS_URL || 'https://se.ifmo.ru/~s332961/python-lab/' }}
         run: bash scripts/deploy.sh .work/helios
 
 ```
@@ -614,6 +629,54 @@ INFO    -  Cleaning site directory
 INFO    -  Building documentation to directory: /Users/artem.solopov/Documents/ChatGPT/python-lab/.work/site
 INFO    -  Documentation built in 0.16 seconds
 
+```
+
+---
+
+## ci-helios-deploy.log
+
+```text
+Последние 40 строк; полный лог: evidence/ci-helios-deploy.log
+2026-09-20T20:45:12.9348879Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-20T20:45:13.1974710Z Preparing to download the following artifacts:
+2026-09-20T20:45:13.1976637Z - helios-site (ID: 10613596514, Size: 908928, Expected Digest: sha256:f5056e88e1f9239d01c9518e55e5b8e19c75a0c34b0d7dfd8b3c218365382c43)
+2026-09-20T20:45:13.4329451Z Redirecting to blob download url: https://productionresultssa17.blob.core.windows.net/actions-results/bd2df616-20d2-4dba-a8ab-935a3474894b/workflow-job-run-174d2e75-63fa-552c-bf4d-2925867ab40b/artifacts/a669d2ab9cf5b510e64847c1c1470d460d89da101a040f43bbb92b921197f796.zip
+2026-09-20T20:45:13.4333943Z Starting download of artifact to: /home/runner/work/python-lab/python-lab/.work/helios
+2026-09-20T20:45:13.7602896Z (node:2332) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-09-20T20:45:14.2320021Z SHA256 digest of downloaded artifact is f5056e88e1f9239d01c9518e55e5b8e19c75a0c34b0d7dfd8b3c218365382c43
+2026-09-20T20:45:14.2320752Z Artifact download completed successfully.
+2026-09-20T20:45:14.2321614Z Total of 1 artifact(s) downloaded
+2026-09-20T20:45:14.2327962Z Download artifact has finished successfully
+2026-09-20T20:45:14.2496832Z ##[group]Run bash scripts/deploy.sh .work/helios
+2026-09-20T20:45:14.2497409Z [36;1mbash scripts/deploy.sh .work/helios[0m
+2026-09-20T20:45:14.2538237Z shell: /usr/bin/bash -e {0}
+2026-09-20T20:45:14.2538587Z env:
+2026-09-20T20:45:14.2540796Z   DEPLOY_KEY: ***
+
+2026-09-20T20:45:14.2544187Z   KNOWN_HOSTS: ***
+
+2026-09-20T20:45:14.2544514Z   SSH_HOST: cs.ifmo.ru
+2026-09-20T20:45:14.2544793Z   SSH_PORT: 2222
+2026-09-20T20:45:14.2545067Z   SSH_USER: s332961
+2026-09-20T20:45:14.2545631Z   REMOTE_DIR: .
+2026-09-20T20:45:14.2546344Z   SITE_URL: https://se.ifmo.ru/~s332961/python-lab/
+2026-09-20T20:45:14.2546821Z ##[endgroup]
+2026-09-20T20:45:21.1578119Z healthcheck OK: HTTP 200, marker_present=True
+2026-09-20T20:45:21.1827423Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-20T20:45:21.1828778Z Post job cleanup.
+2026-09-20T20:45:21.2709233Z [command]/usr/bin/git version
+2026-09-20T20:45:21.2752906Z git version 2.55.0
+2026-09-20T20:45:21.2796425Z Temporarily overriding HOME='/home/runner/work/_temp/85879bc7-f248-4b66-8bd7-32597a920bd9' before making global git config changes
+2026-09-20T20:45:21.2798150Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-20T20:45:21.2802757Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/python-lab/python-lab
+2026-09-20T20:45:21.2849110Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-20T20:45:21.2889323Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-20T20:45:21.3144829Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-20T20:45:21.3193567Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-20T20:45:21.3464207Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-20T20:45:21.3537302Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-20T20:45:21.3993590Z Cleaning up orphan processes
+2026-09-20T20:45:21.4312900Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
 ```
 
 ---

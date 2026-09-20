@@ -1,0 +1,167 @@
+﻿2026-09-20T20:45:11.0572112Z Current runner version: '2.337.0'
+2026-09-20T20:45:11.0598999Z ##[group]Runner Image Provisioner
+2026-09-20T20:45:11.0600246Z Hosted Compute Agent
+2026-09-20T20:45:11.0601046Z Version: 20260828.587
+2026-09-20T20:45:11.0601989Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-20T20:45:11.0602963Z Build Date: 2026-08-28T16:44:25Z
+2026-09-20T20:45:11.0603905Z Worker ID: {06833203-ad64-4d70-bb96-b88646397646}
+2026-09-20T20:45:11.0604927Z Azure Region: westus2
+2026-09-20T20:45:11.0605719Z ##[endgroup]
+2026-09-20T20:45:11.0608086Z ##[group]Operating System
+2026-09-20T20:45:11.0609058Z Ubuntu
+2026-09-20T20:45:11.0609907Z 24.04.5
+2026-09-20T20:45:11.0610676Z LTS
+2026-09-20T20:45:11.0611532Z ##[endgroup]
+2026-09-20T20:45:11.0612326Z ##[group]Runner Image
+2026-09-20T20:45:11.0613201Z Image: ubuntu-24.04
+2026-09-20T20:45:11.0614003Z Version: 20260907.300.1
+2026-09-20T20:45:11.0615608Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-20T20:45:11.0617721Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-20T20:45:11.0618985Z ##[endgroup]
+2026-09-20T20:45:11.0620379Z ##[group]GITHUB_TOKEN Permissions
+2026-09-20T20:45:11.0622566Z Contents: read
+2026-09-20T20:45:11.0623435Z Metadata: read
+2026-09-20T20:45:11.0624172Z ##[endgroup]
+2026-09-20T20:45:11.0626757Z Secret source: Actions
+2026-09-20T20:45:11.0628016Z Cache mode: write
+2026-09-20T20:45:11.0628921Z Prepare workflow directory
+2026-09-20T20:45:11.1040652Z Prepare all required actions
+2026-09-20T20:45:11.1089642Z Getting action download info
+2026-09-20T20:45:11.4495349Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-20T20:45:11.5628078Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-09-20T20:45:11.9201283Z Complete job name: deploy-helios
+2026-09-20T20:45:12.0005198Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-20T20:45:12.0015129Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-20T20:45:12.0016509Z with:
+2026-09-20T20:45:12.0017099Z   persist-credentials: false
+2026-09-20T20:45:12.0017764Z   repository: de6igz/python-lab
+2026-09-20T20:45:12.0021993Z   token: ***
+2026-09-20T20:45:12.0022642Z   ssh-strict: true
+2026-09-20T20:45:12.0023286Z   ssh-user: git
+2026-09-20T20:45:12.0023829Z   clean: true
+2026-09-20T20:45:12.0024400Z   sparse-checkout-cone-mode: true
+2026-09-20T20:45:12.0025048Z   fetch-depth: 1
+2026-09-20T20:45:12.0025609Z   fetch-tags: false
+2026-09-20T20:45:12.0026334Z   show-progress: true
+2026-09-20T20:45:12.0026967Z   lfs: false
+2026-09-20T20:45:12.0027519Z   submodules: false
+2026-09-20T20:45:12.0028089Z   set-safe-directory: true
+2026-09-20T20:45:12.0028729Z   allow-unsafe-pr-checkout: false
+2026-09-20T20:45:12.0029644Z ##[endgroup]
+2026-09-20T20:45:12.1144170Z Syncing repository: de6igz/python-lab
+2026-09-20T20:45:12.1147263Z ##[group]Getting Git version info
+2026-09-20T20:45:12.1148201Z Working directory is '/home/runner/work/python-lab/python-lab'
+2026-09-20T20:45:12.1149436Z [command]/usr/bin/git version
+2026-09-20T20:45:12.1252617Z git version 2.55.0
+2026-09-20T20:45:12.1323858Z ##[endgroup]
+2026-09-20T20:45:12.1371757Z Temporarily overriding HOME='/home/runner/work/_temp/3f64b7e4-f548-4341-a373-4b25efb5ed9e' before making global git config changes
+2026-09-20T20:45:12.1374796Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-20T20:45:12.1379266Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/python-lab/python-lab
+2026-09-20T20:45:12.1452308Z Deleting the contents of '/home/runner/work/python-lab/python-lab'
+2026-09-20T20:45:12.1463203Z ##[group]Initializing the repository
+2026-09-20T20:45:12.1476857Z [command]/usr/bin/git init /home/runner/work/python-lab/python-lab
+2026-09-20T20:45:12.1593279Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-20T20:45:12.1598175Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-20T20:45:12.1599664Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-20T20:45:12.1600540Z hint: call:
+2026-09-20T20:45:12.1601062Z hint:
+2026-09-20T20:45:12.1601715Z hint: 	git config --global init.defaultBranch <name>
+2026-09-20T20:45:12.1602472Z hint:
+2026-09-20T20:45:12.1603177Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-20T20:45:12.1604243Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-20T20:45:12.1605099Z hint:
+2026-09-20T20:45:12.1605769Z hint: 	git branch -m <name>
+2026-09-20T20:45:12.1606745Z hint:
+2026-09-20T20:45:12.1607514Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-20T20:45:12.1608650Z Initialized empty Git repository in /home/runner/work/python-lab/python-lab/.git/
+2026-09-20T20:45:12.1623617Z [command]/usr/bin/git remote add origin https://github.com/de6igz/python-lab
+2026-09-20T20:45:12.1686393Z ##[endgroup]
+2026-09-20T20:45:12.1688904Z ##[group]Disabling automatic garbage collection
+2026-09-20T20:45:12.1690856Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-20T20:45:12.1742026Z ##[endgroup]
+2026-09-20T20:45:12.1743800Z ##[group]Setting up auth
+2026-09-20T20:45:12.1745444Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-20T20:45:12.1773951Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-20T20:45:12.2237577Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-20T20:45:12.2278750Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-20T20:45:12.2521676Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-20T20:45:12.2560322Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-20T20:45:12.2797429Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-20T20:45:12.2838783Z ##[endgroup]
+2026-09-20T20:45:12.2839848Z ##[group]Fetching the repository
+2026-09-20T20:45:12.2849120Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6c1b950e64bd652210eac91f8a36e14f327cf590:refs/remotes/origin/main
+2026-09-20T20:45:12.6096556Z From https://github.com/de6igz/python-lab
+2026-09-20T20:45:12.6098471Z  * [new ref]         6c1b950e64bd652210eac91f8a36e14f327cf590 -> origin/main
+2026-09-20T20:45:12.6101881Z ##[endgroup]
+2026-09-20T20:45:12.6102848Z ##[group]Determining the checkout info
+2026-09-20T20:45:12.6104725Z ##[endgroup]
+2026-09-20T20:45:12.6111891Z [command]/usr/bin/git sparse-checkout disable
+2026-09-20T20:45:12.6201308Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-20T20:45:12.6214865Z ##[group]Checking out the ref
+2026-09-20T20:45:12.6219745Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-09-20T20:45:12.6350888Z Switched to a new branch 'main'
+2026-09-20T20:45:12.6356921Z branch 'main' set up to track 'origin/main'.
+2026-09-20T20:45:12.6364534Z ##[endgroup]
+2026-09-20T20:45:12.6414754Z [command]/usr/bin/git log -1 --format=%H
+2026-09-20T20:45:12.6443988Z 6c1b950e64bd652210eac91f8a36e14f327cf590
+2026-09-20T20:45:12.6455382Z ##[group]Removing auth
+2026-09-20T20:45:12.6460562Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-20T20:45:12.6497508Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-20T20:45:12.6729330Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-20T20:45:12.6760248Z http.https://github.com/.extraheader
+2026-09-20T20:45:12.6769746Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-20T20:45:12.6807234Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-20T20:45:12.7055191Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-20T20:45:12.7092405Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-20T20:45:12.7318946Z ##[endgroup]
+2026-09-20T20:45:12.7611543Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-20T20:45:12.7617764Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-09-20T20:45:12.7619317Z with:
+2026-09-20T20:45:12.7619993Z   name: helios-site
+2026-09-20T20:45:12.7620772Z   path: .work/helios
+2026-09-20T20:45:12.7621611Z   merge-multiple: false
+2026-09-20T20:45:12.7622498Z   repository: de6igz/python-lab
+2026-09-20T20:45:12.7623425Z   run-id: 35536497862
+2026-09-20T20:45:12.7624207Z ##[endgroup]
+2026-09-20T20:45:12.9192781Z Downloading single artifact
+2026-09-20T20:45:12.9345562Z (node:2332) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-20T20:45:12.9348879Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-20T20:45:13.1974710Z Preparing to download the following artifacts:
+2026-09-20T20:45:13.1976637Z - helios-site (ID: 10613596514, Size: 908928, Expected Digest: sha256:f5056e88e1f9239d01c9518e55e5b8e19c75a0c34b0d7dfd8b3c218365382c43)
+2026-09-20T20:45:13.4329451Z Redirecting to blob download url: https://productionresultssa17.blob.core.windows.net/actions-results/bd2df616-20d2-4dba-a8ab-935a3474894b/workflow-job-run-174d2e75-63fa-552c-bf4d-2925867ab40b/artifacts/a669d2ab9cf5b510e64847c1c1470d460d89da101a040f43bbb92b921197f796.zip
+2026-09-20T20:45:13.4333943Z Starting download of artifact to: /home/runner/work/python-lab/python-lab/.work/helios
+2026-09-20T20:45:13.7602896Z (node:2332) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-09-20T20:45:14.2320021Z SHA256 digest of downloaded artifact is f5056e88e1f9239d01c9518e55e5b8e19c75a0c34b0d7dfd8b3c218365382c43
+2026-09-20T20:45:14.2320752Z Artifact download completed successfully.
+2026-09-20T20:45:14.2321614Z Total of 1 artifact(s) downloaded
+2026-09-20T20:45:14.2327962Z Download artifact has finished successfully
+2026-09-20T20:45:14.2496832Z ##[group]Run bash scripts/deploy.sh .work/helios
+2026-09-20T20:45:14.2497409Z [36;1mbash scripts/deploy.sh .work/helios[0m
+2026-09-20T20:45:14.2538237Z shell: /usr/bin/bash -e {0}
+2026-09-20T20:45:14.2538587Z env:
+2026-09-20T20:45:14.2540796Z   DEPLOY_KEY: ***
+
+2026-09-20T20:45:14.2544187Z   KNOWN_HOSTS: ***
+
+2026-09-20T20:45:14.2544514Z   SSH_HOST: cs.ifmo.ru
+2026-09-20T20:45:14.2544793Z   SSH_PORT: 2222
+2026-09-20T20:45:14.2545067Z   SSH_USER: s332961
+2026-09-20T20:45:14.2545631Z   REMOTE_DIR: .
+2026-09-20T20:45:14.2546344Z   SITE_URL: https://se.ifmo.ru/~s332961/python-lab/
+2026-09-20T20:45:14.2546821Z ##[endgroup]
+2026-09-20T20:45:21.1578119Z healthcheck OK: HTTP 200, marker_present=True
+2026-09-20T20:45:21.1827423Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-20T20:45:21.1828778Z Post job cleanup.
+2026-09-20T20:45:21.2709233Z [command]/usr/bin/git version
+2026-09-20T20:45:21.2752906Z git version 2.55.0
+2026-09-20T20:45:21.2796425Z Temporarily overriding HOME='/home/runner/work/_temp/85879bc7-f248-4b66-8bd7-32597a920bd9' before making global git config changes
+2026-09-20T20:45:21.2798150Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-20T20:45:21.2802757Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/python-lab/python-lab
+2026-09-20T20:45:21.2849110Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-20T20:45:21.2889323Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-20T20:45:21.3144829Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-20T20:45:21.3193567Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-20T20:45:21.3464207Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-20T20:45:21.3537302Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-20T20:45:21.3993590Z Cleaning up orphan processes
+2026-09-20T20:45:21.4312900Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
