@@ -447,10 +447,10 @@ release-каталоги и атомарная смена симлинка, ес
 
 - [Таблица CSV](docs/generated/summary.csv)
 - [Метаданные JSON](docs/generated/metadata.json)
-- Коммит: `e92cc2cdca59eadc34df2a3712852e31f40dad31`; незакоммиченные изменения: `True`.
-- Дата сборки UTC: `2026-09-20T20:43:18+00:00`.
+- Коммит: `669afe76f59b88ee4cf0a47afca805fbfe3b8998`; незакоммиченные изменения: `True`.
+- Дата сборки UTC: `2026-09-20T20:50:36+00:00`.
 - Версия данных SHA-256: `95cc0a1ead83a39332e6e7d11cbe28fa90df3ba8af352d435fae9b640ac4a671`.
-- Ключ кэша: `00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670`; попадание: `False`.
+- Ключ кэша: `00c63da5148501c1ae650ad73a6ed02238cfdc6c6156ea02363b5d357c9eb670`; попадание: `True`.
 
 [Как повторить эксперимент](docs/generated/../pipeline.md) · [Исследование способов публикации](docs/generated/../research.md)
 
